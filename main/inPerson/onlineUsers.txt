@@ -1,0 +1,8 @@
+
+Name:Vova  age:25  city:Lviv
+Name:Vitya  age:35  city:Kyiv
+Name:Maksym  age:22  city:Kyiv
+Name:Olena  age:22  city:Odessa
+Name:Alex  age:22  city:Lviv
+Name:Alina  age:22  city:Lviv
+Name:Tamara  age:22  city:Kyiv

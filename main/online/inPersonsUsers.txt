@@ -1,0 +1,8 @@
+
+Name:Valya  age:29  city:Lviv
+Name:Vita  age:20  city:Kyiv
+Name:Andrii  age:22  city:Kyiv
+Name:Oksana  age:22  city:Odessa
+Name:Dina  age:22  city:Lviv
+Name:Panas  age:22  city:Odessa
+Name:Olya  age:22  city:Lviv

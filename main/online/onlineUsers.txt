@@ -1,3 +1,0 @@
-
-Name:Vova  age:25  city:Lviv
-Name:Vitya  age:35  city:Kyiv

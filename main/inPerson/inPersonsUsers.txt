@@ -1,3 +1,0 @@
-
-Name:Vita  age:20  city:Kyiv
-Name:Valya  age:29  city:Lviv
