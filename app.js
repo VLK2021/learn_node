@@ -1,7 +1,8 @@
 // Всі дії виконувати з допомогою модулів (вручну нічого не створюємо)
 // Створити основну папку (main), в яку покласти дві інші папки: перша - online, друга - inPerson
 
-const fs = require('fs');
+const fs = require('fs').promises;
+// const fs = require('fs');
 const path = require("path");
 
 // fs.mkdir(path.join(__dirname, 'main'), (err) => {
@@ -26,16 +27,17 @@ const path = require("path");
 // })
 
 
-// const func = async () => {
+
+// const foo = async () => {
 //     try {
-//         await fs.mkdir(path.join(__dirname, 'main'));
-//         await fs.mkdir(path.join(__dirname, 'main', 'online'));
-//         await fs.mkdir(path.join(__dirname, 'main', 'inPerson'));
+//         await fs.mkdir(path.join(__dirname, 'mainNew'));
+//         await fs.mkdir(path.join(__dirname, 'mainNew', 'onlineNew'));
+//         await fs.mkdir(path.join(__dirname, 'mainNew', 'inPersonNew'));
 //     } catch (e) {
 //         console.log(e);
 //     }
 // }
-// func();
+// foo();
 
 
 // Потім створити в вашому головному файлі (для прикладу app.js) два масиви з обєктами
@@ -62,7 +64,7 @@ const inPersonsUsers = [
     { name: "Oksana", age: 22, city: "Odessa" },
     { name: "Panas", age: 22, city: "Odessa" }
 ]
-
+//===========================================================
 // for (const element of onlineUsers) {
 //     fs.appendFile(path.join(__dirname, 'main', 'online', 'onlineUsers.txt'),
 //         `\nName:${element.name}  age:${element.age}  city:${element.city}`, (err) => {
@@ -82,17 +84,17 @@ const inPersonsUsers = [
 //             }
 //         })
 // }
-
+//======================================================
 // const func = async (arr, folder) => {
 //     await Promise.all(arr.map(async user => {
-//             await fs.writeFile(path.join(__dirname, 'main', folder, `${user.name}.txt`), `${user.name}\n${user.age}\n${user.city}\n`)
+//             await fs.writeFile(path.join(__dirname, 'mainNew', folder, `${user.name}.txt`), `${user.name}\n${user.age}\n${user.city}\n`)
 //         })
 //     );
 // }
-// func(onlineUsers, 'online');
-// func(inPersonsUsers, 'inPerson');
+// func(onlineUsers, 'onlineNew');
+// func(inPersonsUsers, 'inPersonNew');
 
-
+//==========================================================
 // fs.truncate(path.join(__dirname, 'main', 'online', 'onlineUsers.txt'), (err) => {
 //     if(err) {
 //         console.log(err);
@@ -111,6 +113,7 @@ const inPersonsUsers = [
 // Коли ви це виконаєте напишіть функцію яка буде міняти місцями юзерів з одного файлу і папки в іншу.
 // (ті, що були в папці inPerson будуть в папці online)
 
+//=====================================================
 // fs.rename(path.join(__dirname, 'main', 'inPerson', 'inPersonsUsers.txt'),
 //     path.join(__dirname, 'main', 'online', 'inPersonsUsers.txt'), (err) => {
 //     if (err) {
@@ -127,27 +130,23 @@ const inPersonsUsers = [
 //     }
 //     })
 
-
-
-
-
-
 // fs.readdir(path.join(__dirname, 'main', 'inPerson'), (err,data) => {
 //     console.log(data);
 // })
 
-// const foo = async (moveFrom, moveTo) => {
-//     const pathToDir = path.join(__dirname, 'main', moveFrom);
-//     const arrFileNames = await fs.readdir(pathToDir);
-//     console.log(arrFileNames);
-//
-//     // arrFileNames.map(fileName => {
-//     //     if (!fileName.includes('new_')) {
-//     //         fs.rename(path.join(pathToDir, fileName), path.join(__dirname, 'main', moveTo, `new_${fileName}`));
-//     //     }
-//     // });
-// }
-// foo('inPerson', 'online');
-// foo('online', 'inPerson');
+
+//=======================================================
+const foo = async (moveFrom, moveTo) => {
+    const pathToDir = path.join(__dirname, 'mainNew', moveFrom);
+    const arrFileNames = await fs.readdir(pathToDir);
+
+    arrFileNames.map(fileName => {
+        if (!fileName.includes('new_')) {
+            fs.rename(path.join(pathToDir, fileName), path.join(__dirname, 'mainNew', moveTo, `new_${fileName}`));
+        }
+    });
+}
+foo('inPersonNew', 'onlineNew');
+foo('onlineNew', 'inPersonNew');
 
 
