@@ -75,13 +75,23 @@ app.get('/users', (req, res) => {
     res.render('users', {users})
 })
 
+// work with params of url
+app.get('/users/:userId', (req, res) => {
+    // console.log(req.params);
+    const {userId} = req.params;
+    console.log(req.query);
+    res.json(users[userId])
+})
+
 app.post('/login', (req, res) => {
     // console.log(req.body);
     users.push(req.body)
     res.redirect('/users')
 })
 
-
+app.use((req, res) => {
+    res.render('notFound')
+})
 
  app.listen(5200, () => {
     console.log('Server has started on PORT 5200');
