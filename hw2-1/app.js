@@ -41,6 +41,12 @@ app.get('/users', (req, res) => {
 
 
 app.post('/login', (req, res) => {
+    const userEmail = users.some(user => user.email === req.body.email);
+    if (userEmail) {
+        error = 'User with this email exist!';
+        res.redirect('/error');
+        return;
+    }
     users.push(req.body)
     res.redirect('/users')
 })
