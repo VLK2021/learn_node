@@ -1,0 +1,3 @@
+Name:Alina
+Age:42
+City:Lytck

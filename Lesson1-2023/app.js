@@ -126,13 +126,13 @@ const fs = require('fs');
 // })
 
 
-fs.rename(path.join(__dirname, 'test1', 'test2.txt'),
-    path.join(__dirname, 'public','files', 'test', 'test2', 'test3.txt'), err => {
-    if (err) {
-        console.log(err);
-        throw err;
-    }
-})
+// fs.rename(path.join(__dirname, 'test1', 'test2.txt'),
+//     path.join(__dirname, 'public','files', 'test', 'test2', 'test3.txt'), err => {
+//     if (err) {
+//         console.log(err);
+//         throw err;
+//     }
+// })
 
 
 

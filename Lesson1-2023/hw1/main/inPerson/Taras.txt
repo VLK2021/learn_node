@@ -1,0 +1,3 @@
+Name:Taras
+Age:25
+City:Kyiv

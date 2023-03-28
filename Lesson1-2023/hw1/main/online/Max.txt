@@ -1,0 +1,3 @@
+Name:Max
+Age:26
+City:Lviv
