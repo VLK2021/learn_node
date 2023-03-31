@@ -46,9 +46,22 @@ app.get('/login', (req, res) => {
     res.render('login')
 });
 
+
 app.get('/users', (req, res) => {
+    if (Object.keys(req.query).length) {
+        let usersArray = [...users];
+        if (req.query.city) {
+            usersArray = usersArray.filter(us => us.city === req.query.city);
+        }
+        if (req.query.age) {
+            usersArray = usersArray.filter(us => us.age === req.query.age);
+        }
+        res.render('users', {users: usersArray});
+        return;
+    }
     res.render('users', {users});
 });
+
 
 app.get('/error', (req, res) => {
     res.render('error');
@@ -63,8 +76,6 @@ app.get('/users/:userId', (req, res) => {
 })
 
 
-
-
 app.post('/login', (req, res) => {
     const {email} = req.body;
     const em = users.some(us => us.email === email);
@@ -75,15 +86,6 @@ app.post('/login', (req, res) => {
         res.redirect('/users');
     }
 });
-
-
-
-
-
-
-
-
-
 
 
 
