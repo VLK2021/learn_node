@@ -1,17 +1,13 @@
 const {Router} = require('express');
+
 const users = require('../db/users');
+const userController = require('../controllers/userController');
 
 const userRouter = Router();
 
 
-userRouter.get('/', (req, res) => {
-    res.render('users', {users})
-});
-
-userRouter.get('/:userId',(req, res) => {
-    const {userId} = req.params;
-    res.json(users[userId])
-});
+userRouter.get('/', userController.renderUsers);
+userRouter.get('/:userId',userController.getUserId);
 
 module.exports = userRouter;
 
