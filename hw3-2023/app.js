@@ -1,3 +1,6 @@
+// Попереднє дз переписати на роути і контролери і написати мідлвару яка буде перевіряти по роуту /sigIn
+// чи імейл існує в масиві юзерів і другу мідлвару /login чи користувач ввів всі data
+
 const express = require('express');
 const path = require('path');
 const {engine} = require('express-handlebars');
