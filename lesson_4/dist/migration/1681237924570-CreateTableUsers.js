@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateTableUsers1681225728832 = void 0;
-class CreateTableUsers1681225728832 {
+exports.CreateTableUsers1681237924570 = void 0;
+class CreateTableUsers1681237924570 {
     async up(queryRunner) {
         await queryRunner.query(`
             CREATE TABLE IF NOT EXISTS Users (
@@ -12,7 +12,10 @@ class CreateTableUsers1681225728832 {
         `);
     }
     async down(queryRunner) {
+        await queryRunner.query(`
+            DROP TABLE IF EXISTS Users
+        `);
     }
 }
-exports.CreateTableUsers1681225728832 = CreateTableUsers1681225728832;
-//# sourceMappingURL=1681225728832-CreateTableUsers.js.map
+exports.CreateTableUsers1681237924570 = CreateTableUsers1681237924570;
+//# sourceMappingURL=1681237924570-CreateTableUsers.js.map
