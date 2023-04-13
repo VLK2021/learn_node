@@ -1,13 +1,16 @@
 import 'reflect-metadata';
-import express from 'express';
-import { createConnection } from 'typeorm';
+import express, { Request, Response } from 'express';
+import { createConnection, getManager } from 'typeorm';
+
+import { User } from './entity/user';
 
 const app = express();
 
-// app.get('/users', (req: Request, res: Response) => {
-//     // await getManager().getRepository();
-//     res.end();
-// });
+app.get('/users', async (req: Request, res: Response) => {
+    const users = await getManager().getRepository(User).find();
+    console.log(users);
+    res.json(users);
+});
 
 app.listen(5500, async () => {
     console.log('Server is started!L5');

@@ -11,16 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
-let User = class User {
+const commonFields_1 = require("./commonFields");
+let User = class User extends commonFields_1.CommonFields {
 };
-__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
-        width: 250,
+        width: 255,
         nullable: false,
     }),
     __metadata("design:type", String)
@@ -28,7 +25,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
-        width: 250,
+        width: 255,
         nullable: false,
     }),
     __metadata("design:type", String)
@@ -42,7 +39,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
-        width: 250,
+        width: 255,
         nullable: false,
         unique: true,
     }),
@@ -51,7 +48,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
-        width: 250,
+        width: 255,
         nullable: false,
         unique: true,
     }),
@@ -60,7 +57,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
-        width: 250,
+        width: 255,
         nullable: false,
     }),
     __metadata("design:type", String)

@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
+const user_1 = require("./entity/user");
 const app = (0, express_1.default)();
-// app.get('/users', (req: Request, res: Response) => {
-//     // await getManager().getRepository();
-//     res.end();
-// });
+app.get('/users', async (req, res) => {
+    const users = await (0, typeorm_1.getManager)().getRepository(user_1.User).find();
+    console.log(users);
+    res.json(users);
+});
 app.listen(5500, async () => {
     console.log('Server is started!L5');
     try {
