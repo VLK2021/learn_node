@@ -14,7 +14,7 @@ class CreateTableUsers1681237924570 {
                 password VARCHAR(250) NOT NULL,
                 createdAt TIMESTAMP DEFAULT(UTC_TIMESTAMP()) NOT NULL,
                 deletedAt TIMESTAMP
-            )
+            ) 
         `);
     }
     async down(queryRunner) {

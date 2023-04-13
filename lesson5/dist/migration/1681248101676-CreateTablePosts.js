@@ -40,7 +40,7 @@ class CreateTablePosts1681248101676 {
                 {
                     name: 'deletedAt',
                     type: 'timestamp',
-                    isNullable: false,
+                    isNullable: true,
                 },
             ],
             foreignKeys: [
