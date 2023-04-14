@@ -13,6 +13,16 @@ app.get('/users', async (req: Request, res: Response) => {
     res.json(users);
 });
 
+// with query
+// app.get('/users', async (req: Request, res: Response) => {
+//     const users = await getManager().getRepository(User)
+//         .createQueryBuilder('user')
+//         .leftJoin('posts', 'posts', 'posts.userId = user.id')
+//         .where('posts.title = "test"')
+//         .getMany();
+//     res.json(users);
+// });
+
 // app.get('/users', async (req: Request, res: Response) => {
 //     const users = await getManager().getRepository(User)
 //         .createQueryBuilder('user')
