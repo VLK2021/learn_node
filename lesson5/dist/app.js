@@ -52,11 +52,17 @@ app.put('/users/:id', async (req, res) => {
     });
     res.json(createdUser);
 });
+// app.delete('/users/:id', async (req, res) => {
+//     console.log(req.body);
+//     const deletedUser = await getManager()
+//         .getRepository(User)
+//         .delete({ id: Number(req.params.id) });
+//     res.json(deletedUser);
+// });
 app.delete('/users/:id', async (req, res) => {
-    console.log(req.body);
     const deletedUser = await (0, typeorm_1.getManager)()
         .getRepository(user_1.User)
-        .delete({ id: Number(req.params.id) });
+        .softDelete({ id: Number(req.params.id) });
     res.json(deletedUser);
 });
 app.listen(5500, async () => {
