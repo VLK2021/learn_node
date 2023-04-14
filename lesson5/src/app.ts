@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.get('/users', async (req: Request, res: Response) => {
-    const users = await getManager().getRepository(User).find();
+    const users = await getManager().getRepository(User).find({ relations: ['posts'] });
     res.json(users);
 });
 

@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Post = void 0;
 const typeorm_1 = require("typeorm");
 const commonFields_1 = require("./commonFields");
-const post_1 = require("./post");
-let User = class User extends commonFields_1.CommonFields {
+const user_1 = require("./user");
+let Post = class Post extends commonFields_1.CommonFields {
 };
 __decorate([
     (0, typeorm_1.Column)({
@@ -22,7 +22,7 @@ __decorate([
         nullable: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
+], Post.prototype, "title", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
@@ -30,45 +30,20 @@ __decorate([
         nullable: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
+], Post.prototype, "text", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'int',
     }),
     __metadata("design:type", Number)
-], User.prototype, "age", void 0);
+], Post.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'varchar',
-        width: 255,
-        nullable: false,
-        unique: true,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "phone", void 0);
-__decorate([
-    (0, typeorm_1.Column)({
-        type: 'varchar',
-        width: 255,
-        nullable: false,
-        unique: true,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, typeorm_1.Column)({
-        type: 'varchar',
-        width: 255,
-        nullable: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => post_1.Post, (post) => post.user),
-    __metadata("design:type", Array)
-], User.prototype, "posts", void 0);
-User = __decorate([
-    (0, typeorm_1.Entity)('users', { database: 'okten' })
-], User);
-exports.User = User;
-//# sourceMappingURL=user.js.map
+    (0, typeorm_1.ManyToOne)(() => user_1.User, (user) => user.posts),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
+    __metadata("design:type", user_1.User)
+], Post.prototype, "user", void 0);
+Post = __decorate([
+    (0, typeorm_1.Entity)('posts', { database: 'okten' })
+], Post);
+exports.Post = Post;
+//# sourceMappingURL=post.js.map
