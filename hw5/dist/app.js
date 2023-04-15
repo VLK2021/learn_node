@@ -17,12 +17,25 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
 const user_1 = require("./entity/user");
+const post_1 = require("./entity/post");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded());
-app.get('/users', async (req, res) => {
-    const users = await (0, typeorm_1.getManager)().getRepository(user_1.User).find({ relations: ['posts'] });
-    res.json(users);
+// app.get('/users', async (req: Request, res: Response) => {
+//     const users = await getManager().getRepository(User).find({ relations: ['posts'] });
+//     res.json(users);
+// });
+app.get('/posts', async (req, res) => {
+    const posts = await (0, typeorm_1.getManager)().getRepository(post_1.Post).find();
+    res.json(posts);
+});
+app.get('/posts/:userId', async (req, res) => {
+    const postsUser = await (0, typeorm_1.getManager)().getRepository(post_1.Post)
+        .createQueryBuilder('post')
+        .where(`post.userId = '${req.params.userId}'`)
+        .leftJoin('User', 'user', 'user.id = post.userId')
+        .getMany();
+    res.json(postsUser);
 });
 // with query
 // app.get('/users', async (req: Request, res: Response) => {
@@ -51,6 +64,36 @@ app.get('/users', async (req, res) => {
 app.post('/users', async (req, res) => {
     const createdUser = await (0, typeorm_1.getManager)().getRepository(user_1.User).save(req.body);
     res.json(createdUser);
+});
+//= ==================================================================================
+// app.put('/posts/:userId', async (req: Request<{userId: string}>, res: Response) => {
+//     const { title, text } = req.body;
+//     const createdPost = await getManager().getRepository(Post)
+//         .createQueryBuilder('post')
+//         .leftJoin('User', 'user', 'user.id = post.userId')
+//         .update({ 'post.userId' = `${req.params.userId}` }, { title, text });
+//     res.json(createdPost);
+// });
+// app.put('/posts/:userId', async (req: Request<{userId: string}>, res: Response) => {
+//     const { title, text } = req.body;
+//     const updatedPost = await getManager().getRepository(Post)
+//         .createQueryBuilder('post')
+//         .leftJoin('User', 'user', 'user.id = post.userId')
+//         .update(post)
+//         .set({ userId: +req.params.userId, title, text })
+//         .execute();
+//     res.json(updatedPost);
+// });
+//= ==============`post.userId = '${req.params.userId}'=========================================================================================
+app.put('/posts/:postId', async (req, res) => {
+    const { title, text } = req.body;
+    const updatePost = await (0, typeorm_1.getManager)()
+        .getRepository(post_1.Post)
+        .update({ id: Number(req.params.postId) }, {
+        title,
+        text,
+    });
+    res.json(updatePost);
 });
 app.put('/users/:id', async (req, res) => {
     const { password, email } = req.body;
