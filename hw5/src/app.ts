@@ -15,19 +15,25 @@ import { createConnection, getManager } from 'typeorm';
 
 import { User } from './entity/user';
 import { Post } from './entity/post';
+import { Comment } from './entity/comments';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
-// app.get('/users', async (req: Request, res: Response) => {
-//     const users = await getManager().getRepository(User).find({ relations: ['posts'] });
-//     res.json(users);
-// });
+app.get('/users', async (req: Request, res: Response) => {
+    const users = await getManager().getRepository(User).find({ relations: ['posts'] });
+    res.json(users);
+});
 
 app.get('/posts', async (req: Request, res: Response) => {
-    const posts = await getManager().getRepository(Post).find();
+    const posts = await getManager().getRepository(Post).find({ relations: ['comments'] });
     res.json(posts);
+});
+
+app.get('/comments', async (req: Request, res: Response) => {
+    const comments = await getManager().getRepository(Comment).find();
+    res.json(comments);
 });
 
 app.get('/posts/:userId', async (req: Request<{userId: string}>, res: Response) => {
@@ -37,6 +43,16 @@ app.get('/posts/:userId', async (req: Request<{userId: string}>, res: Response) 
         .leftJoin('User', 'user', 'user.id = post.userId')
         .getMany();
     res.json(postsUser);
+});
+
+app.get('/comments/:userId', async (req: Request<{userId: string}>, res: Response) => {
+    const commentUser = await getManager().getRepository(Comment)
+        .createQueryBuilder('comment')
+        .where(`comment.authorId = '${req.params.userId}'`)
+        .leftJoinAndSelect('comment.user', 'user')
+        .leftJoinAndSelect('comment.post', 'post')
+        .getMany();
+    res.json(commentUser);
 });
 
 // with query
@@ -69,6 +85,16 @@ app.get('/posts/:userId', async (req: Request<{userId: string}>, res: Response) 
 app.post('/users', async (req: Request, res: Response) => {
     const createdUser = await getManager().getRepository(User).save(req.body);
     res.json(createdUser);
+});
+
+app.post('/posts', async (req: Request, res: Response) => {
+    const createdPost = await getManager().getRepository(Post).save(req.body);
+    res.json(createdPost);
+});
+
+app.post('/comments', async (req: Request, res: Response) => {
+    const createdComment = await getManager().getRepository(Comment).save(req.body);
+    res.json(createdComment);
 });
 //= ==================================================================================
 // app.put('/posts/:userId', async (req: Request<{userId: string}>, res: Response) => {
